@@ -3,8 +3,6 @@ import {
   SlashCommandSubcommandBuilder,
 } from '@discordjs/builders';
 import logger from 'jet-logger';
-import { allowPraiseHandler } from 'src/handlers/admin/config/allow-praise';
-import { restrictPraiseHandler } from 'src/handlers/admin/config/restrict-praise';
 import { announcementHandler } from '../handlers/admin/announce';
 import { Command } from '../interfaces/Command';
 
@@ -24,22 +22,7 @@ export const admin: Command = {
             .setDescription('The message content to publish.')
             .setRequired(true)
         )
-    )
-    .addSubcommandGroup((group) =>
-      group
-        .setName('config')
-        .setDescription('Configure the praise system')
-        .addSubcommand((subCommand) =>
-          subCommand
-            .setName('allow-praise')
-            .setDescription('Allow praise in this channel.')
-        )
-        .addSubcommand((subCommand) =>
-          subCommand
-            .setName('restrict-praise')
-            .setDescription('Restrict praise in this channel.')
-        )
-    ),
+    ), 
 
   async execute(interaction) {
     try {
@@ -53,14 +36,6 @@ export const admin: Command = {
       switch (subCommand) {
         case 'announce': {
           await announcementHandler(interaction);
-          break;
-        }
-        case 'allow-praise': {
-          await allowPraiseHandler(interaction);
-          break;
-        }
-        case 'restrict-praise': {
-          await restrictPraiseHandler(interaction);
           break;
         }
       }
