@@ -22,7 +22,7 @@ export const admin: Command = {
             .setDescription('The message content to publish.')
             .setRequired(true)
         )
-    ), 
+    ),
 
   async execute(interaction) {
     try {
