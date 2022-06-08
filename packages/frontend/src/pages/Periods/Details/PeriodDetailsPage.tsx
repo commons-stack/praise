@@ -70,11 +70,11 @@ const PeriodDetailPage = (): JSX.Element | null => {
   if (!period || !period.receivers) return null;
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="praise-page">
       <BreadCrumb name="Quantification periods" icon={faCalendarAlt} />
       <BackLink to="/periods" />
 
-      <div className="max-w-4xl praise-box">
+      <div className="praise-box">
         <React.Suspense fallback="Loading…">
           <PeriodDetailHead />
         </React.Suspense>
@@ -84,9 +84,9 @@ const PeriodDetailPage = (): JSX.Element | null => {
         <QuantifierMessage />
       </React.Suspense>
 
-      <div className="flex space-x-4">
+      <div className="flex sm:space-x-4 sm:flex-row flex-col">
         <div>
-          <div className="w-40 py-5 mb-5 break-words border rounded-lg shadow-sm bg-gray-50">
+          <div className="w-full sm:w-40 py-5 mb-5 break-words border rounded-lg shadow-sm bg-gray-50">
             <nav>
               <NavItem
                 to={`${url}/receivers`}
@@ -107,7 +107,7 @@ const PeriodDetailPage = (): JSX.Element | null => {
           </div>
         </div>
 
-        <div className="w-full max-w-3xl praise-box">
+        <div className="praise-box w-full">
           <Suspense fallback="Loading…">
             <Switch>
               <Route path={`${path}/receivers`}>

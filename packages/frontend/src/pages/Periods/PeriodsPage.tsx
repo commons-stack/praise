@@ -9,7 +9,7 @@ import PeriodsTable from './components/Table';
 
 const PeriodsPage = (): JSX.Element => {
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="praise-page">
       <BreadCrumb name="Quantification periods" icon={faCalendarAlt} />
 
       <ActiveNoticesBoard />

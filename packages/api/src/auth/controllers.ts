@@ -24,16 +24,9 @@ import {
   RefreshRequestInput,
   TokenSet,
 } from './types';
+import { generateLoginMessage } from './utils';
 
 const jwtService = new JwtService();
-
-const generateLoginMessage = (account: string, nonce: string): string => {
-  return (
-    'SIGN THIS MESSAGE TO LOGIN TO PRAISE.\n\n' +
-    `ADDRESS:\n${account}\n\n` +
-    `NONCE:\n${nonce}`
-  );
-};
 
 /**
  * Description

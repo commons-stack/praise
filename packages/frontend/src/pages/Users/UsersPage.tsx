@@ -5,7 +5,7 @@ import UsersTable from './components/UsersTable';
 
 const UsersPage = (): JSX.Element => {
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="praise-page">
       <BreadCrumb name="Users" icon={faUserFriends} />
       <UsersStatistics />
       <div className="praise-box">

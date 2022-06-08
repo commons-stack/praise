@@ -40,7 +40,7 @@ const QuantifyPeriodPage = (): JSX.Element => {
   const { periodId } = useParams<PeriodPageParams>();
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="praise-page">
       <BreadCrumb name="Quantify" icon={faCalendarAlt} />
       <BackLink to={`/periods/${periodId}`} />
 

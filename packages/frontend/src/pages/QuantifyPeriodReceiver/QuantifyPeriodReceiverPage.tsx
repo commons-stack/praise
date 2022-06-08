@@ -83,7 +83,7 @@ const QuantifyPeriodReceiverPage = (): JSX.Element => {
   const { periodId, receiverId } = useParams<PeriodAndReceiverPageParams>();
 
   return (
-    <div className="max-w-5xl mx-auto h-full">
+    <div className="praise-page h-full">
       <React.Suspense fallback="Loading…">
         <PeriodBreadCrumb />
       </React.Suspense>

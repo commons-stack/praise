@@ -205,3 +205,6 @@ This project uses JavaScript and the nodeJS environment. For setting up this env
  |- frontend
 
 ```
+
+## Review Developer Documentation
+Additional developer documentation is included in [DEVELOPMENT.md](./DEVELOPMENT.md)

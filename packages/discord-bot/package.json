@@ -1,6 +1,6 @@
 {
   "name": "discord-bot",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "license": "GPL-3.0-or-later",
   "description": "The Praise Discord bot is the main way for users to interact with the Praise system.",
   "dependencies": {

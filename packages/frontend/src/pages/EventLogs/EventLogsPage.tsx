@@ -5,7 +5,7 @@ import EventLogsList from './components/EventLogsList';
 
 const EventLogsPage = (): JSX.Element => {
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="praise-page">
       <BreadCrumb name="Transparency Log" icon={faBook} />
 
       <div className="w-full praise-box overflow-x-auto">

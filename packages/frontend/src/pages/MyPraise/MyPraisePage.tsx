@@ -6,7 +6,7 @@ import MyPraiseTable from './components/MyPraiseTable';
 
 const MyPraise = (): JSX.Element => {
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="praise-page">
       <BreadCrumb name="My praise" icon={faPrayingHands} />
 
       <ActiveNoticesBoard />

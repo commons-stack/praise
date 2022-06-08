@@ -1,26 +1,16 @@
 import { PraiseDto, QuantificationDto } from 'api/dist/praise/types';
 
-export const quantification = (
+export const findPraiseQuantification = (
   praise: PraiseDto,
   userId: string
 ): QuantificationDto | undefined => {
   return praise.quantifications.find((q) => q.quantifier === userId);
 };
 
-export const dismissed = (praise: PraiseDto, userId: string): boolean => {
-  const q = quantification(praise, userId);
-  return q ? !!q.dismissed : false;
-};
-
-export const duplicate = (praise: PraiseDto, userId: string): boolean => {
-  const q = quantification(praise, userId);
-  return q ? (q.duplicatePraise ? true : false) : false;
-};
-
-export const shortDuplicatePraiseId = (
+export const shortenDuplicatePraiseId = (
   praise: PraiseDto,
   userId: string
 ): string => {
-  const q = quantification(praise, userId);
+  const q = findPraiseQuantification(praise, userId);
   return q && q.duplicatePraise ? q.duplicatePraise?.slice(-4) : '';
 };

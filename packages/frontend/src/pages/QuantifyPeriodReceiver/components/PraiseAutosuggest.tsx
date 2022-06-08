@@ -10,7 +10,7 @@ import { faPrayingHands } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PraiseDto } from 'api/dist/praise/types';
 import { useCombobox } from 'downshift';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
@@ -25,6 +25,8 @@ const PraiseAutosuggest = ({
   onClose,
   praise,
 }: PraiseAutosuggestProps): JSX.Element | null => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const { periodId, receiverId } = useParams<PeriodAndReceiverPageParams>();
   const userId = useRecoilValue(ActiveUserId);
   const data = useRecoilValue(
@@ -35,6 +37,12 @@ const PraiseAutosuggest = ({
     periodId,
     'PRAISE_QUANTIFY_RECEIVER_PSEUDONYMS'
   ) as boolean;
+
+  useEffect(() => {
+    if (inputRef && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [inputRef]);
 
   if (!data) return null;
 
@@ -93,7 +101,7 @@ const PraiseAutosuggest = ({
               className="pl-10 text-sm w-80"
               type="text"
               placeholder="Search by praise id"
-              {...getInputProps()}
+              {...getInputProps({ ref: inputRef })}
             />
           </div>
         </div>

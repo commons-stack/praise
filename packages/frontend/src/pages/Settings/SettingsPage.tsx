@@ -26,18 +26,16 @@ const SettingsPage = (): JSX.Element | null => {
   );
 
   return (
-    <div className="max-w-3xl mx-auto">
+    <div className="praise-page">
       <BreadCrumb name="Settings" icon={faCogs} />
 
-      <div className="flex space-x-4">
-        <div>
-          <div className="w-40 py-5 mb-5 break-words border rounded-lg shadow-sm bg-gray-50">
-            <nav>
-              <NavItem to={`${url}/application`} description="Application" />
-              <NavItem to={`${url}/period`} description="Period Defaults" />
-              <NavItem to={`${url}/discord`} description="Discord Bot" />
-            </nav>
-          </div>
+      <div className="flex flex-col sm:space-x-4 sm:flex-row">
+        <div className="w-full py-5 mb-5 break-words border rounded-lg shadow-sm h-fit sm:w-40 bg-gray-50">
+          <nav>
+            <NavItem to={`${url}/application`} description="Application" />
+            <NavItem to={`${url}/period`} description="Period Defaults" />
+            <NavItem to={`${url}/discord`} description="Discord Bot" />
+          </nav>
         </div>
 
         <div className="w-full max-w-3xl praise-box">

@@ -6,7 +6,7 @@ import PraiseTable from './components/PraiseTable';
 
 const StartPage: React.FC = (): ReactElement => {
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="praise-page">
       <BreadCrumb name="Praise" icon={faPrayingHands} />
 
       <ActiveNoticesBoard />

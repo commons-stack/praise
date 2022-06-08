@@ -119,7 +119,7 @@ const PeriodDetails = (): JSX.Element | null => {
           <PeriodDateForm />
           <div className="mt-5">
             {period.status === 'OPEN' || period.status === 'QUANTIFY' ? (
-              <div className="flex justify-between">
+              <div className="flex gap-4 justify-between">
                 {period.status === 'OPEN' &&
                 period.receivers &&
                 period?.receivers.length > 0 &&

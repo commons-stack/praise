@@ -1,6 +1,6 @@
 {
   "name": "mongodb",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "license": "GPL-3.0-or-later",
   "description": "The Prasie data is stored in a MongoDb database."
 }

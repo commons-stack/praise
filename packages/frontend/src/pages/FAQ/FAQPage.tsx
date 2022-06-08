@@ -24,7 +24,7 @@ const FAQPage = (): JSX.Element | null => {
   if (!faq || !faq.length) return null;
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="praise-page">
       <BreadCrumb name="FAQ" icon={faQuestionCircle} />
 
       <div className="w-full praise-box">

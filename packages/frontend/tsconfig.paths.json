@@ -6,6 +6,7 @@
       "@/components/*": ["components/*"],
       "@/eth/*": ["eth/*"],
       "@/pages/*": ["pages/*"],
+      "@/layout/*": ["layout/*"],
       "@/model/*": ["model/*"],
       "@/navigation/*": ["navigation/*"],
       "@/svg/*": ["svg/*"],
