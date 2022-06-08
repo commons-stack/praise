@@ -4,7 +4,6 @@ import { UserModel } from 'api/dist/user/entities';
 import { EventLogTypeKey } from 'api/src/eventlog/types';
 import { logEvent } from 'api/src/eventlog/utils';
 import logger from 'jet-logger';
-import { getSetting } from '../utils/settings';
 import { getUserAccount } from '../utils/getUserAccount';
 import { UserRole } from 'api/dist/user/types';
 import {
@@ -16,10 +15,10 @@ import {
   praiseSuccessDM,
   roleMentionWarning,
   undefinedReceiverWarning,
-  giverRoleError,
   forwardSuccess,
   giverNotActivatedError,
 } from '../utils/praiseEmbeds';
+import { assertPraiseGiver } from '../utils/assertPraiseGiver';
 
 import { praiseAllowedInChannel } from '../utils/praisePermissions';
 import { CommandHandler } from 'src/interfaces/CommandHandler';
@@ -28,10 +27,9 @@ export const forwardHandler: CommandHandler = async (
   interaction,
   responseUrl
 ) => {
-  const { guild, channel, member } = interaction;
-
   if (!responseUrl) return;
 
+  const { guild, channel, member } = interaction;
   if (!guild || !member || !channel) {
     await interaction.editReply(await dmError());
     return;
@@ -54,35 +52,24 @@ export const forwardHandler: CommandHandler = async (
     await interaction.editReply(await notActivatedError());
     return;
   }
+
   const forwarderUser = await UserModel.findOne({ _id: forwarderAccount.user });
   if (!forwarderUser?.roles.includes(UserRole.FORWARDER)) {
     await interaction.editReply(
-      "You don't have the permission to use this command."
+      "**❌ You don't have the permission to use this command.**"
     );
     return;
   }
 
   const praiseGiver = interaction.options.getMember('giver') as GuildMember;
-
-  const praiseGiverRoleID = await getSetting('PRAISE_GIVER_ROLE_ID');
-  const praiseGiverRole = guild.roles.cache.find(
-    (r) => r.id === praiseGiverRoleID
-  );
-
-  if (
-    praiseGiverRole &&
-    !praiseGiver?.roles.cache.find((r) => r.id === praiseGiverRole?.id)
-  ) {
-    await interaction.editReply({
-      embeds: [await giverRoleError(praiseGiverRole, praiseGiver.user)],
-    });
+  if (!praiseGiver) {
+    await interaction.editReply('**❌ No Praise giver specified**');
     return;
   }
-  const giverAccount = await getUserAccount(praiseGiver);
+
+  if (!(await assertPraiseGiver(praiseGiver, interaction, true))) return;
 
   const receivers = interaction.options.getString('receivers');
-  const reason = interaction.options.getString('reason');
-
   const receiverData = {
     validReceiverIds: receivers?.match(/<@!([0-9]+)>/g),
     undefinedReceivers: receivers?.match(/@([a-z0-9]+)/gi),
@@ -99,11 +86,13 @@ export const forwardHandler: CommandHandler = async (
     return;
   }
 
+  const reason = interaction.options.getString('reason');
   if (!reason || reason.length === 0) {
     await interaction.editReply(await missingReasonError());
     return;
   }
 
+  const giverAccount = await getUserAccount(praiseGiver);
   if (!giverAccount.user) {
     await interaction.editReply(await giverNotActivatedError(praiseGiver.user));
     return;

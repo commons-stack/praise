@@ -1,11 +1,11 @@
 import { User, MessageEmbed, Role } from 'discord.js';
-import { getSetting } from './settings';
+import { settingValue } from 'api/dist/shared/settings';
 
 export const praiseSuccess = async (
   praised: string[],
   reason: string
 ): Promise<string> => {
-  const msg = await getSetting('PRAISE_SUCCESS_MESSAGE');
+  const msg = (await settingValue('PRAISE_SUCCESS_MESSAGE')) as string;
   if (msg && typeof msg === 'string') {
     return msg
       ?.replace('{@receivers}', `${praised.join(', ')}`)
@@ -20,7 +20,7 @@ export const forwardSuccess = async (
   receivers: string[],
   reason: string
 ): Promise<string> => {
-  const msg = await getSetting('FORWARD_SUCCESS_MESSAGE');
+  const msg = (await settingValue('FORWARD_SUCCESS_MESSAGE')) as string;
   if (msg && typeof msg === 'string') {
     return msg
       ?.replace('{@giver}', `<@!${giver.id}>`)
@@ -36,7 +36,9 @@ export const praiseError = (title: string, description: string): string => {
 };
 
 export const notActivatedError = async (): Promise<string> => {
-  const msg = await getSetting('PRAISE_ACCOUNT_NOT_ACTIVATED_ERROR');
+  const msg = (await settingValue(
+    'PRAISE_ACCOUNT_NOT_ACTIVATED_ERROR'
+  )) as string;
   if (msg && typeof msg === 'string') {
     return msg;
   } else {
@@ -45,7 +47,9 @@ export const notActivatedError = async (): Promise<string> => {
 };
 
 export const alreadyActivatedError = async (): Promise<string> => {
-  const msg = await getSetting('PRAISE_ACCOUNT_ALREADY_ACTIVATED_ERROR');
+  const msg = (await settingValue(
+    'PRAISE_ACCOUNT_ALREADY_ACTIVATED_ERROR'
+  )) as string;
   if (msg && typeof msg === 'string') {
     return msg;
   } else {
@@ -56,7 +60,9 @@ export const alreadyActivatedError = async (): Promise<string> => {
 export const giverNotActivatedError = async (
   praiseGiver: User
 ): Promise<string> => {
-  const msg = await getSetting('FORWARD_FROM_UNACTIVATED_GIVER_ERROR');
+  const msg = (await settingValue(
+    'FORWARD_FROM_UNACTIVATED_GIVER_ERROR'
+  )) as string;
   if (msg && typeof msg === 'string') {
     return msg
       .replace(
@@ -70,7 +76,7 @@ export const giverNotActivatedError = async (
 };
 
 export const dmError = async (): Promise<string> => {
-  const msg = await getSetting('DM_ERROR');
+  const msg = (await settingValue('DM_ERROR')) as string;
   if (msg && typeof msg === 'string') {
     return msg;
   } else {
@@ -78,11 +84,13 @@ export const dmError = async (): Promise<string> => {
   }
 };
 
-export const roleError = async (
+export const praiseRoleError = async (
   praiseGiverRole: Role,
   user: User
 ): Promise<MessageEmbed> => {
-  const msg = await getSetting('PRAISE_WITHOUT_PRAISE_GIVER_ROLE_ERROR');
+  const msg = (await settingValue(
+    'PRAISE_WITHOUT_PRAISE_GIVER_ROLE_ERROR'
+  )) as string;
   if (msg && typeof msg === 'string') {
     return new MessageEmbed().setColor('#ff0000').setDescription(
       msg
@@ -101,13 +109,13 @@ export const roleError = async (
   );
 };
 
-export const giverRoleError = async (
+export const forwardRoleError = async (
   praiseGiverRole: Role,
   user: User
 ): Promise<MessageEmbed> => {
-  const msg = await getSetting(
+  const msg = (await settingValue(
     'FORWARD_FROM_USER_WITHOUT_PRAISE_GIVER_ROLE_ERROR'
-  );
+  )) as string;
   if (msg && typeof msg === 'string') {
     return new MessageEmbed().setColor('#ff0000').setDescription(
       msg
@@ -127,7 +135,7 @@ export const giverRoleError = async (
 };
 
 export const invalidReceiverError = async (): Promise<string> => {
-  const msg = await getSetting('PRAISE_INVALID_RECEIVERS_ERROR');
+  const msg = (await settingValue('PRAISE_INVALID_RECEIVERS_ERROR')) as string;
   if (msg && typeof msg === 'string') {
     return msg;
   }
@@ -135,7 +143,7 @@ export const invalidReceiverError = async (): Promise<string> => {
 };
 
 export const missingReasonError = async (): Promise<string> => {
-  const msg = await getSetting('PRAISE_INVALID_RECEIVERS_ERROR');
+  const msg = (await settingValue('PRAISE_INVALID_RECEIVERS_ERROR')) as string;
   if (msg && typeof msg === 'string') {
     return msg;
   }
@@ -146,7 +154,9 @@ export const undefinedReceiverWarning = async (
   receivers: string,
   user: User
 ): Promise<string> => {
-  const msg = await getSetting('PRAISE_UNDEFINED_RECEIVERS_WARNING');
+  const msg = (await settingValue(
+    'PRAISE_UNDEFINED_RECEIVERS_WARNING'
+  )) as string;
   if (msg && typeof msg === 'string') {
     return msg
       .replace('{user}', `${user?.username}#${user?.discriminator}` || '...')
@@ -160,7 +170,7 @@ export const roleMentionWarning = async (
   receivers: string,
   user: User
 ): Promise<string> => {
-  const msg = await getSetting('PRAISE_TO_ROLE_WARNING');
+  const msg = (await settingValue('PRAISE_TO_ROLE_WARNING')) as String;
   if (msg && typeof msg === 'string') {
     return msg
       .replace('{@receivers}', receivers)
@@ -173,7 +183,7 @@ export const roleMentionWarning = async (
 export const praiseSuccessDM = async (
   msgUrl: string
 ): Promise<MessageEmbed> => {
-  const msg = await getSetting('PRAISE_SUCCESS_DM');
+  const msg = (await settingValue('PRAISE_SUCCESS_DM')) as string;
   if (msg && typeof msg === 'string') {
     return new MessageEmbed()
       .setColor('#696969')
@@ -185,7 +195,9 @@ export const praiseSuccessDM = async (
 };
 
 export const notActivatedDM = async (msgUrl: string): Promise<MessageEmbed> => {
-  const msg = await getSetting('PRAISE_ACCOUNT_NOT_ACTIVATED_ERROR_DM');
+  const msg = (await settingValue(
+    'PRAISE_ACCOUNT_NOT_ACTIVATED_ERROR_DM'
+  )) as string;
   if (msg && typeof msg === 'string') {
     return new MessageEmbed()
       .setColor('#ff0000')
@@ -196,28 +208,3 @@ export const notActivatedDM = async (msgUrl: string): Promise<MessageEmbed> => {
     `**[YOU HAVE BEEN PRAISED](${msgUrl})\nPRAISE ACCOUNT NOT ACTIVATED. USE \`/activate\` TO ACTIVATE YOUR ACCOUNT. (message not set)`
   );
 };
-
-/*
-  const addInfoFields = (embed: MessageEmbed) => {
-    embed.addField(
-      'Valid Receivers',
-      receiverData.validReceiverIds?.join(', ') || 'No Receivers Mentioned.'
-    );
-    if (receiverData.undefinedReceivers) {
-      embed.addField(
-        'Undefined Receivers',
-        (receiverData.undefinedReceivers?.join(', ') || '') +
-          "\nThese users don't exist in the system, and hence can't be praised."
-      );
-    }
-    if (receiverData.roleMentions) {
-      embed.addField(
-        'Roles Mentioned',
-        (receiverData.roleMentions?.join(', ') || '') +
-          "\nYou can't dish praise to entire roles."
-      );
-    }
-    embed.addField('Reason', reason || 'No reason entered.');
-    return embed;
-  };
-*/

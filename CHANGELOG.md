@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Option to turn on/off the Discord role requirement for Praise givers #419 #434 #440
 - Support multiple wallets: WalletConneect, Trust, Rainbow etc #424
 
 ### Fixed
@@ -21,12 +22,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Convert the Quantifier Pool screen to a User Admin screen #320 #395
+- Option - Require discord role to allow praise giving #434
 
 ### Fixed
 
 - Removed migration unable to fetch info from Discord threads #445
 - Quantify slider displaying praise score #444 #443
 - Clicking a link within a Praise reason should _only_ trigger opening the link #427 #437
+- Whoami command says user does not have praise powers, when they do #419
 
 ## [0.7.0] - 2022-05-31
 
