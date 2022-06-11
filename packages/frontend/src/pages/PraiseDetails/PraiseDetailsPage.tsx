@@ -25,7 +25,7 @@ const PraiseDetailsPage = (): JSX.Element | null => {
   if (!praise) return null;
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="praise-page">
       <BreadCrumb name={'Praise details'} icon={faCalendarAlt} />
       <BackLink to={backLinkUrl} />
 

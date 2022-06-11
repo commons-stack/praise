@@ -64,7 +64,7 @@ const UserDetailsPage = (): JSX.Element | null => {
       </div>
       <div className="praise-box">
         <span className="text-xl font-bold">Roles</span>
-        <div className="flex gap-4 pt-5">
+        <div className="flex flex-wrap gap-4 pt-5">
           {roles.map((role) => (
             <div
               key={role}

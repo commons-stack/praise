@@ -4,9 +4,11 @@ import {
   NonceResponse,
   TokenSet,
 } from 'api/dist/auth/types';
-import { ActiveTokenSet, RefreshToken } from '../model/auth';
+import { ActivateRequestBody } from 'api/dist/activate/types';
 import { makeApiClient } from './api';
 import { getRecoil, setRecoil } from 'recoil-nexus';
+import { ActiveTokenSet, RefreshToken } from '@/model/auth';
+import { AccountActivated } from '@/model/activate';
 
 export const requestApiAuth = async (
   params: AuthRequestInput
@@ -64,4 +66,21 @@ export const requestNonce = async (
   const { nonce } = response.data as NonceResponse;
 
   return nonce;
+};
+
+export const requestApiActivate = async (
+  params: ActivateRequestBody
+): Promise<boolean> => {
+  const { ethereumAddress, accountId, message, signature } = params;
+  const apiClient = makeApiClient();
+  const response = await apiClient.post('/activate', {
+    ethereumAddress,
+    accountId,
+    message,
+    signature,
+  });
+
+  setRecoil(AccountActivated, !!response.data);
+
+  return getRecoil(AccountActivated);
 };

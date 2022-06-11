@@ -2,15 +2,19 @@ import { UserModel } from 'api/dist/user/entities';
 import { UserAccountModel } from 'api/dist/useraccount/entities';
 import { CommandInteraction, GuildMember } from 'discord.js';
 import { UserState } from '../interfaces/UserState';
-import { getSetting } from '../utils/settings';
 import { getUserAccount } from '../utils/getUserAccount';
 import { getStateEmbed } from '../utils/stateEmbed';
+import { assertPraiseGiver } from '../utils/assertPraiseGiver';
+import { dmError } from '../utils/praiseEmbeds';
 
 export const whoamiHandler = async (
   interaction: CommandInteraction
 ): Promise<void> => {
   const { member, guild } = interaction;
-  if (!member || !guild) return;
+  if (!guild || !member) {
+    await interaction.editReply(await dmError());
+    return;
+  }
 
   const ua = await getUserAccount(member as GuildMember);
 
@@ -21,18 +25,11 @@ export const whoamiHandler = async (
     activated: !ua.user ? false : true,
   };
 
-  const praiseGiverRoleID = await getSetting('PRAISE_GIVER_ROLE_ID');
-  const praiseGiverRole = guild.roles.cache.find(
-    (r) => r.id === praiseGiverRoleID
+  state.hasPraiseGiverRole = await assertPraiseGiver(
+    member as GuildMember,
+    interaction,
+    false
   );
-  const updatedMember = await guild.members.fetch(member.user.id);
-
-  if (
-    praiseGiverRole &&
-    updatedMember.roles.cache.find((r) => r.id === praiseGiverRole?.id)
-  ) {
-    state.hasPraiseGiverRole = true;
-  }
 
   const User = await UserModel.findOne({ _id: ua.user });
   state.praiseRoles = User?.roles || [];

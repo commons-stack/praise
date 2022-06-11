@@ -104,6 +104,7 @@ const PeriodsForm = (): JSX.Element => {
                     value={input.value}
                     onChange={input.onChange}
                     className="w-72 block"
+                    inputClassName="w-100"
                   />
                   {apiResponse && (
                     <FieldErrorMessage
@@ -126,7 +127,7 @@ const PeriodsForm = (): JSX.Element => {
 
 const PeriodsCreatePage = (): JSX.Element => {
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="praise-page">
       <BreadCrumb name="Quantification periods" icon={faCalendarAlt} />
       <BackLink to="/periods" />
 

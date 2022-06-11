@@ -1,3 +1,7 @@
+.praise-page {
+  @apply max-w-5xl mx-auto
+}
+
 .praise-box {
   @apply p-5 mb-5 break-words border rounded-lg shadow-sm bg-gray-50;
 }

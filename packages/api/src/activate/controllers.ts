@@ -12,19 +12,7 @@ import { UserAccountModel } from '@useraccount/entities';
 import { ethers } from 'ethers';
 import { Response } from 'express';
 import { ActivateRequestBody } from './types';
-
-const generateLoginMessage = (
-  accountId: string,
-  ethereumAddress: string,
-  token: string
-): string => {
-  return (
-    'SIGN THIS MESSAGE TO ACTIVATE YOUR ACCOUNT.\n\n' +
-    `ACCOUNT ID:\n${accountId}\n\n` +
-    `ADDRESS:\n${ethereumAddress}\n\n` +
-    `TOKEN:\n${token}`
-  );
-};
+import { generateActivateMessage } from './utils';
 
 const activate = async (
   req: TypedRequestBody<ActivateRequestBody>,
@@ -46,7 +34,7 @@ const activate = async (
     throw new BadRequestError('User account already activated.');
 
   // Generate expected message, token included.
-  const generatedMsg = generateLoginMessage(
+  const generatedMsg = generateActivateMessage(
     accountId,
     ethereumAddress,
     userAccount.activateToken
@@ -68,6 +56,7 @@ const activate = async (
 
   // Link user account with user
   userAccount.user = user;
+  userAccount.activateToken = undefined;
   await userAccount.save();
 
   await logEvent(EventLogTypeKey.AUTHENTICATION, 'Activated account', {
