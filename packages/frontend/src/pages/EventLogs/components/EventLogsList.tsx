@@ -1,43 +1,46 @@
-import { useState } from 'react';
-import { useAllEventLogs } from '@/model/eventlogs';
+import {
+  AllEventLogsQueryParameters,
+  useAllEventLogs,
+} from '@/model/eventlogs';
 import EventLog from '@/components/eventlog/EventLog';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Dispatch, SetStateAction } from 'react';
 
-const EventLogsTable = (): JSX.Element | null => {
-  const [page, setPage] = useState<number>(1);
-  const { data } = useAllEventLogs({
-    sortColumn: 'createdAt',
-    sortType: 'desc',
-    limit: 15,
-    page,
-  });
+interface EventLogsTableProps {
+  queryParameters: AllEventLogsQueryParameters;
+  setPage: Dispatch<SetStateAction<number>>;
+}
 
-  if (data.docs.length === 0) return null;
+const EventLogsTable = ({
+  queryParameters,
+  setPage,
+}: EventLogsTableProps): JSX.Element | null => {
+  const { logsData } = useAllEventLogs(queryParameters);
 
   return (
-    <div className="praise-box">
+    <div className="w-full">
       <div className="w-full space-y-4">
-        {data.docs.map((eventlog, i) => (
+        {logsData.docs.map((eventlog, i) => (
           <EventLog
             eventlog={eventlog}
-            className={`${i % 2 === 0 && 'bg-gray-100'} px-2`}
+            className={`${i % 2 === 0 && 'bg-gray-100 dark:bg-slate-500'} px-7`}
             key={i}
           />
         ))}
       </div>
-      {(data.hasNextPage || data.hasPrevPage) && (
-        <div className="w-full flex justify-between space-x-4 mt-4">
+      {(logsData.hasNextPage || logsData.hasPrevPage) && (
+        <div className="flex justify-between w-full mt-4 space-x-4">
           <div>
-            {data.hasPrevPage && (
+            {logsData.hasPrevPage && (
               <a
                 className="cursor-pointer"
-                onClick={(): void => setPage(page - 1)}
+                onClick={(): void => setPage(queryParameters.page - 1)}
               >
                 <FontAwesomeIcon
                   icon={faArrowLeft}
                   size="1x"
-                  className="mr-2"
+                  className="pl-5 mr-2"
                 />
                 Previous
               </a>
@@ -45,16 +48,17 @@ const EventLogsTable = (): JSX.Element | null => {
           </div>
 
           <div>
-            {data.hasNextPage && (
+            {logsData.hasNextPage && (
               <a
                 className="cursor-pointer"
-                onClick={(): void => setPage(page + 1)}
+                // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+                onClick={(): void => setPage(queryParameters.page + 1)}
               >
                 Next
                 <FontAwesomeIcon
                   icon={faArrowRight}
                   size="1x"
-                  className="ml-2"
+                  className="pr-5 ml-2"
                 />
               </a>
             )}

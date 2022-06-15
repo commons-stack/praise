@@ -76,12 +76,10 @@ const PeriodsTable = (): JSX.Element => {
       <thead>
         {headerGroups.map((headerGroup) => (
           // eslint-disable-next-line react/jsx-key
-          <tr {...headerGroup.getHeaderGroupProps()}>
+          <tr className="px-5">
             {headerGroup.headers.map((column) => (
               // eslint-disable-next-line react/jsx-key
-              <th className="text-left" {...column.getHeaderProps()}>
-                {column.render('Header')}
-              </th>
+              <th className="text-left">{column.render('Header')}</th>
             ))}
           </tr>
         ))}
@@ -94,7 +92,7 @@ const PeriodsTable = (): JSX.Element => {
             <tr
               className={classNames(
                 row.values.status === 'CLOSED' ? 'text-gray-400' : '',
-                'cursor-pointer hover:bg-gray-100'
+                'px-5 cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-500'
               )}
               id="" //TODO set id
               {...row.getRowProps()}

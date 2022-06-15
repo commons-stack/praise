@@ -17,7 +17,7 @@ const UsersTableRow = ({ data }: IUsersTableRow): JSX.Element | null => {
 
   return (
     <div
-      className="flex items-center w-full p-3 cursor-pointer hover:bg-gray-100"
+      className="flex items-center w-full px-8 py-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-500"
       onClick={(): void => history.push(`users/${data._id}`)}
     >
       <div className="flex items-center w-full ">

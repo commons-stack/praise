@@ -23,6 +23,16 @@ const eventLogTypeTransformer = (
   } as EventLogTypeDto;
 };
 
+export const eventLogTypeListTransformer = async (
+  eventLogTypes: EventLogTypeDocument[]
+): Promise<EventLogTypeDto[]> => {
+  const eventLogTypeDtos = await Promise.all(
+    eventLogTypes.map((eventLogType) => eventLogTypeTransformer(eventLogType))
+  );
+
+  return eventLogTypeDtos;
+};
+
 export const eventLogTransformer = async (
   eventLog: EventLogDocument,
   currentUserRoles: UserRole[] = [UserRole.USER]

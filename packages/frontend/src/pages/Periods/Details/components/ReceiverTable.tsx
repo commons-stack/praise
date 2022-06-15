@@ -104,7 +104,7 @@ const ReceiverTable = (): JSX.Element | null => {
             return (
               // eslint-disable-next-line react/jsx-key
               <tr
-                className="cursor-pointer hover:bg-gray-100"
+                className="cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-500"
                 {...row.getRowProps()}
                 onClick={handleClick(row.original)}
               >

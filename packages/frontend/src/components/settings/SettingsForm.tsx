@@ -69,7 +69,7 @@ const DisabledFormFields = (
     <Notice type="danger" className="mb-8">
       <span>Settings locked for this period</span>
     </Notice>
-    <div className="mb-2 space-y-4">
+    <div className="mb-2 space-y-4 px-5">
       {settings.map((setting: SettingDto | PeriodSettingDto) => (
         <div key={setting.key}>
           <label className="block font-bold">{setting.label}</label>

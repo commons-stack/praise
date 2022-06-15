@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Toaster } from 'react-hot-toast';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { RecoilRoot } from 'recoil';
+import { RecoilRoot, useRecoilValue } from 'recoil';
 import RecoilNexus from 'recoil-nexus';
 import { useErrorBoundary } from 'use-error-boundary';
 // eslint-disable-next-line import/no-unresolved
@@ -13,7 +13,8 @@ import {
   wallet,
   RainbowKitProvider,
   lightTheme,
-  Theme,
+  Theme as RainbowTheme,
+  darkTheme,
 } from '@rainbow-me/rainbowkit';
 import { merge } from 'lodash';
 import { configureChains, createClient, WagmiConfig, chain } from 'wagmi';
@@ -21,6 +22,7 @@ import { publicProvider } from 'wagmi/providers/public';
 import Routes from './navigation/Routes';
 import ErrorPage from './pages/ErrorPage';
 import LoadScreen from '@/components/LoadScreen';
+import { Theme } from '@/model/theme';
 import './styles/globals.css';
 
 const LOAD_DELAY = 500;
@@ -92,7 +94,7 @@ const customRainbowkitTheme = merge(lightTheme(), {
     connectButton: '0.25rem', // tailwind radius 'rounded'
     modal: '0.25rem',
   },
-} as Theme);
+} as RainbowTheme);
 
 interface DelayedLoadingProps {
   children: JSX.Element;
@@ -101,12 +103,24 @@ const DelayedLoading = ({
   children,
 }: DelayedLoadingProps): JSX.Element | null => {
   const [delay, setDelay] = React.useState<boolean>(true);
+  const theme = useRecoilValue(Theme);
 
   React.useEffect(() => {
     setTimeout(() => {
       setDelay(false);
     }, LOAD_DELAY);
   }, []);
+
+  React.useEffect(() => {
+    const root = document.documentElement;
+    if (theme !== 'Light') {
+      root.classList.add('dark');
+      localStorage.setItem('theme', 'Dark');
+    } else {
+      localStorage.setItem('theme', 'Light');
+      root.classList.remove('dark');
+    }
+  }, [theme]);
 
   // Possibility to add loader here
   if (delay) return null;
@@ -127,12 +141,20 @@ const ErrorBoundary = ({ children }: ErrorBoundaryProps): JSX.Element => {
   );
 };
 
+const getRainbowTheme = (): RainbowTheme => {
+  const currentMode = localStorage.getItem('theme');
+  if (currentMode === 'Dark') {
+    return darkTheme();
+  }
+  return customRainbowkitTheme;
+};
+
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
       <RecoilNexus />
       <WagmiConfig client={wagmiClient}>
-        <RainbowKitProvider chains={chains} theme={customRainbowkitTheme}>
+        <RainbowKitProvider chains={chains} theme={getRainbowTheme()}>
           <Router>
             <main>
               <DelayedLoading>

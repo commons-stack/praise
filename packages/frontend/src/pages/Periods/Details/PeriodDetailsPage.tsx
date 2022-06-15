@@ -84,9 +84,9 @@ const PeriodDetailPage = (): JSX.Element | null => {
         <QuantifierMessage />
       </React.Suspense>
 
-      <div className="flex sm:space-x-4 sm:flex-row flex-col">
+      <div className="flex flex-col sm:space-x-4 sm:flex-row">
         <div>
-          <div className="w-full sm:w-40 py-5 mb-5 break-words border rounded-lg shadow-sm bg-gray-50">
+          <div className="w-40 py-5 mb-5 break-words border rounded-lg shadow-sm bg-gray-50 dark:bg-slate-600">
             <nav>
               <NavItem
                 to={`${url}/receivers`}
@@ -107,7 +107,7 @@ const PeriodDetailPage = (): JSX.Element | null => {
           </div>
         </div>
 
-        <div className="praise-box w-full">
+        <div className="w-full praise-box px-0">
           <Suspense fallback="Loading…">
             <Switch>
               <Route path={`${path}/receivers`}>

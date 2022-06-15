@@ -67,7 +67,7 @@ const Praise = ({
             )}
             arrow
           >
-            <span className="ml-2 text-xs text-gray-500">
+            <span className="ml-2 text-xs text-gray-500 dark:text-white/50">
               {localizeAndFormatIsoDateRelative(praise.createdAt)}
             </span>
           </Tooltip>

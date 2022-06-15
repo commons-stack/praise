@@ -8,7 +8,7 @@ const UsersPage = (): JSX.Element => {
     <div className="praise-page">
       <BreadCrumb name="Users" icon={faUserFriends} />
       <UsersStatistics />
-      <div className="praise-box">
+      <div className="praise-box px-0">
         <UsersTable />
       </div>
     </div>

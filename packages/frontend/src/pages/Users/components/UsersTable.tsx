@@ -7,16 +7,21 @@ import {
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { UserDto, UserRole } from 'api/dist/user/types';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import UsersTableRow from './UsersTableRow';
 import UsersTablePagination from './UsersTablePagination';
+import SearchInput from '@/components/form/SearchInput';
+import SelectInput from '@/components/form/SelectInput';
+
+interface roleOptionsProps {
+  value: string;
+  label: string;
+}
 
 const roleOptions = [
-  { name: 'All users', value: UserRole.USER },
-  { name: 'Admins', value: UserRole.ADMIN },
-  { name: 'Forwarders', value: UserRole.FORWARDER },
-  { name: 'Quantifiers', value: UserRole.QUANTIFIER },
+  { label: 'All users', value: UserRole.USER },
+  { label: 'Admins', value: UserRole.ADMIN },
+  { label: 'Forwarders', value: UserRole.FORWARDER },
+  { label: 'Quantifiers', value: UserRole.QUANTIFIER },
 ];
 
 const USERS_PER_PAGE = 10;
@@ -27,8 +32,8 @@ const UsersTable = (): JSX.Element => {
   const allQuantifierUsers = useRecoilValue(AllQuantifierUsers);
   const allUsers = useRecoilValue(AllUsers);
   const [tableData, setTableData] = React.useState<UserDto[]>();
-  const [selectedRole, setSelectedRole] = React.useState<UserRole>(
-    UserRole.USER
+  const [selectedRole, setSelectedRole] = React.useState<roleOptionsProps>(
+    roleOptions[0]
   );
   const [filter, setFilter] = React.useState<string>('');
   const [page, setPage] = React.useState<number>(1);
@@ -60,7 +65,7 @@ const UsersTable = (): JSX.Element => {
   }, [allUsers]);
 
   React.useEffect(() => {
-    switch (selectedRole) {
+    switch (selectedRole.value) {
       case UserRole.USER:
         setTableData(allUsers);
         break;
@@ -98,39 +103,15 @@ const UsersTable = (): JSX.Element => {
 
   return (
     <>
-      <div className="flex flex-col gap-4 sm:flex-row sm:gap-4">
-        <select
-          className="bg-transparent border-black"
-          onChange={(event: React.ChangeEvent<HTMLSelectElement>): void =>
-            setSelectedRole(UserRole[event.target.value])
-          }
-        >
-          {roleOptions.map((option) => (
-            <option key={option.name} value={option.value}>
-              {option.name}
-            </option>
-          ))}
-        </select>
-        <div className="flex items-center border border-black">
-          <label className="relative">
-            <FontAwesomeIcon
-              icon={faMagnifyingGlass}
-              size="1x"
-              className="absolute transform -translate-y-1/2 top-1/2 left-3"
-            />
-            <input
-              type="text"
-              name="search"
-              placeholder="Search"
-              className="block pl-8 bg-transparent border-none outline-none focus:ring-0"
-              value={filter}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
-                setFilter(event.target.value)
-              }
-            />
-          </label>
-        </div>
+      <div className="flex flex-col gap-4 mx-5 sm:flex-row">
+        <SelectInput
+          handleChange={setSelectedRole}
+          selected={selectedRole}
+          options={roleOptions}
+        />
+        <SearchInput handleChange={setFilter} value={filter} />
       </div>
+
       <div className="flex justify-between px-4 my-4">
         <div className="w-1/2">
           <span className="font-bold">User</span>
