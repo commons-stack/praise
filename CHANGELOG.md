@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Option to turn on/off the Discord role requirement for Praise givers #419 #434 #440
 - Support multiple wallets: WalletConneect, Trust, Rainbow etc #424
+- Option to limitting praise access to certain channels.
 
 ### Fixed
 
