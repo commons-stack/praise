@@ -24,7 +24,13 @@ export const assertPraiseAllowedInChannel = async (
     (!allowedInAllChannels &&
       !allowedChannelsList.includes(Number.parseInt(getChannelId(channel))))
   ) {
-    await interaction.editReply('Praise not allowed in this channel.');
+    await interaction.editReply(
+      `**❌ Praise Restricted**\nPraise not allowed in this channel.\nTo praise, use the following channels - ${allowedChannelsList
+        .map((id) => {
+          `<#${id.toString()}>`;
+        })
+        .join(', ')}.`
+    );
     return false;
   } else {
     return true;
