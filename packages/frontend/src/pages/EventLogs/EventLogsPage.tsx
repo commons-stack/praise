@@ -62,16 +62,12 @@ const EventLogsPage = (): JSX.Element => {
       debounce((data) => {
         const params = {
           ...defaultQueryParameters,
-          ...{ sortType: data.selectedSort.value },
-          ...{
-            type: Array.prototype.map
-              .call(data.selectedFilters, (s) => s.key)
-              .toString(),
-          },
-          ...{
-            search: data.searchValue,
-          },
-          ...{ page: data.page },
+          sortType: data.selectedSort.value,
+          type: Array.prototype.map
+            .call(data.selectedFilters, (s) => s.key)
+            .toString(),
+          search: data.searchValue,
+          page: data.page,
         };
 
         setQueryParameters(params);

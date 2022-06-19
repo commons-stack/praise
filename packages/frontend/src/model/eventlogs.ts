@@ -1,10 +1,7 @@
-import { useAuthApiQuery } from '@/model/api';
 import { makeApiAuthClient } from '@/utils/api';
 import { EventLogDto, EventLogTypeDto } from 'api/dist/eventlog/types';
 import { PaginatedResponseBody } from 'api/dist/shared/types';
-import { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
-import { selectorFamily } from 'recoil';
 
 export type AllEventLogsQueryParameters = {
   sortColumn: string;
@@ -15,37 +12,34 @@ export type AllEventLogsQueryParameters = {
   search: string;
 };
 
-/**
- * Query selector that fetches all praise periods from the API.
- */
-export const AllEventLogsQuery = selectorFamily({
-  key: 'AllEventLogsQuery',
-  get:
-    (queryParams: AllEventLogsQueryParameters) =>
-    async ({ get }): Promise<AxiosResponse<unknown>> => {
-      const apiAuthClient = makeApiAuthClient();
-      const response = await apiAuthClient.get('/eventlogs/all', {
-        params: queryParams,
-      });
-
-      return response;
-    },
-});
-
 export const useAllEventLogs = (
   queryParameters: AllEventLogsQueryParameters
 ): {
-  logsData: PaginatedResponseBody<EventLogDto>;
+  data: PaginatedResponseBody<EventLogDto>;
   loading: boolean;
 } => {
-  const allEventLogsQueryResponse = useAuthApiQuery(
-    AllEventLogsQuery(queryParameters)
-  );
+  const [loading, setLoading] = useState<boolean>(false);
+  const [logs, setLogs] = useState<PaginatedResponseBody<EventLogDto>>({
+    docs: [],
+  });
 
-  const paginatedResponse =
-    allEventLogsQueryResponse.data as PaginatedResponseBody<EventLogDto>;
+  useEffect(() => {
+    const fetchData = async (): Promise<void> => {
+      setLoading(true);
 
-  return { logsData: paginatedResponse, loading: false };
+      const apiAuthClient = makeApiAuthClient();
+      const response = await apiAuthClient.get('/eventlogs/all', {
+        params: queryParameters,
+      });
+
+      setLogs(response.data);
+      setLoading(false);
+    };
+
+    void fetchData();
+  }, [setLogs, setLoading, queryParameters]);
+
+  return { data: logs, loading };
 };
 
 export const useAllEventLogTypes = (): {
