@@ -16,6 +16,7 @@ import {
   roleMentionWarning,
   undefinedReceiverWarning,
 } from '../utils/praiseEmbeds';
+import { assertPraiseAllowedInChannel } from '../utils/assertPraiseAllowedInChannel';
 import { assertPraiseGiver } from '../utils/assertPraiseGiver';
 import { CommandHandler } from 'src/interfaces/CommandHandler';
 
@@ -33,6 +34,8 @@ export const praiseHandler: CommandHandler = async (
 
   if (!(await assertPraiseGiver(member as GuildMember, interaction, true)))
     return;
+
+  if (!(await assertPraiseAllowedInChannel(interaction))) return;
 
   const ua = {
     accountId: member.user.id,

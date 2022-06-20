@@ -3,10 +3,10 @@ import {
   SlashCommandSubcommandBuilder,
 } from '@discordjs/builders';
 import logger from 'jet-logger';
-import { announcementHandler } from '../handlers/announce';
+import { announcementHandler } from '../handlers/admin/announce';
 import { Command } from '../interfaces/Command';
 
-export const praiseAdmin: Command = {
+export const admin: Command = {
   data: new SlashCommandBuilder()
     .setName('admin')
     .setDescription('Commands to perform admin actions for Praise')
