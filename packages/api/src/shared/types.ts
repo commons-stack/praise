@@ -20,6 +20,15 @@ export interface SearchQueryInput extends QueryInput {
 
 export interface SearchQueryInputParsedQs extends SearchQueryInput, Query {}
 
+export interface EventLogsQueryInput extends QueryInput {
+  search?: string;
+  type?: string;
+}
+
+export interface EventLogsQueryInputParsedQs
+  extends EventLogsQueryInput,
+    Query {}
+
 export interface TypedRequest<T extends Query, U> extends Request {
   body: U;
   query: T;

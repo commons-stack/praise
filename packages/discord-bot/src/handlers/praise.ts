@@ -16,7 +16,7 @@ import {
   roleMentionWarning,
   undefinedReceiverWarning,
 } from '../utils/praiseEmbeds';
-import { praiseAllowedInChannel } from '../utils/praisePermissions';
+import { assertPraiseAllowedInChannel } from '../utils/assertPraiseAllowedInChannel';
 import { assertPraiseGiver } from '../utils/assertPraiseGiver';
 import { CommandHandler } from 'src/interfaces/CommandHandler';
 
@@ -32,20 +32,10 @@ export const praiseHandler: CommandHandler = async (
     return;
   }
 
-  // pass ID of parent channel if command used in a thread.
-  if (
-    (await praiseAllowedInChannel(
-      interaction,
-      channel.type === 'GUILD_PUBLIC_THREAD' ||
-        channel.type === 'GUILD_PRIVATE_THREAD'
-        ? channel?.parent?.id || channel.id
-        : channel.id
-    )) === false
-  )
-    return;
-
   if (!(await assertPraiseGiver(member as GuildMember, interaction, true)))
     return;
+
+  if (!(await assertPraiseAllowedInChannel(interaction))) return;
 
   const ua = {
     accountId: member.user.id,

@@ -3880,6 +3880,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-csv@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "@types/react-csv@npm:1.1.2"
+  dependencies:
+    "@types/react": "*"
+  checksum: 0c69c969544cfbbf9b921e3bc8933d83a976af6edd1e126098467d47bb1e3f5c49b1aa6ecd3d5ec0b713c08ec5371ded4db121a91929ace893ef06d200557f49
+  languageName: node
+  linkType: hard
+
 "@types/react-dom@npm:^17.0.9":
   version: 17.0.17
   resolution: "@types/react-dom@npm:17.0.17"
@@ -5075,6 +5084,7 @@ __metadata:
     express-async-errors: ^3.1.1
     express-fileupload: ^1.3.1
     faker: ^5.5.3
+    greedy-number-partitioning: "https://github.com/mattyg/greedy-number-partitioning.git"
     helmet: ^4.6.0
     http-status-codes: ^2.1.4
     jet-logger: ^1.1.5
@@ -9516,6 +9526,7 @@ __metadata:
     "@rainbow-me/rainbowkit": ^0.2.0
     "@tailwindcss/forms": latest
     "@types/react": ^17.0.19
+    "@types/react-csv": ^1.1.2
     "@types/react-dom": ^17.0.9
     "@types/react-router-dom": ^5.1.8
     "@types/react-table": ^7.7.6
@@ -9551,6 +9562,7 @@ __metadata:
     query-string: ^7.1.0
     react: ^17.0.2
     react-bottom-scroll-listener: ^5.0.0
+    react-csv: ^2.2.2
     react-day-picker: ^8.0.2
     react-dom: ^17.0.2
     react-final-form: ^6.5.7
@@ -9990,6 +10002,13 @@ __metadata:
   version: 4.2.10
   resolution: "graceful-fs@npm:4.2.10"
   checksum: 3f109d70ae123951905d85032ebeae3c2a5a7a997430df00ea30df0e3a6c60cf6689b109654d6fdacd28810a053348c4d14642da1d075049e6be1ba5216218da
+  languageName: node
+  linkType: hard
+
+"greedy-number-partitioning@https://github.com/mattyg/greedy-number-partitioning.git":
+  version: 0.1.0
+  resolution: "greedy-number-partitioning@https://github.com/mattyg/greedy-number-partitioning.git#commit=c34a2eb15f39f87a8d9f602820ae22c55a40aa33"
+  checksum: b6ab1b4e35b2a8ba60a51765fc62a07d3e133486825df47d94dd7699d6f4445e9745d0221c1d188665a9548d9a7dbd1de47b075a59109b93975c434a72ae9345
   languageName: node
   linkType: hard
 
@@ -15443,6 +15462,13 @@ __metadata:
     react: ^16.0.0 || ^17.0.0
     react-dom: ^16.0.0 || ^17.0.0
   checksum: 0a735bc8e12b88c8b713b9bbcdd15bd1c28a5f6f2b290c7216f4043c09d2b3ae453a9fe3ee2abefb758595faf6850f26cd721973d608fa39f1996326edaa5611
+  languageName: node
+  linkType: hard
+
+"react-csv@npm:^2.2.2":
+  version: 2.2.2
+  resolution: "react-csv@npm:2.2.2"
+  checksum: a6ffabd67fc9ba1478b003977923cfa3ccdd9553ac5edcc3824b4a5ea849b87cb2acfcc0781b0cd0a259bf56e6a7dfd35cfc307576aa51819fc5a32b03118fab
   languageName: node
   linkType: hard
 

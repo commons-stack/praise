@@ -107,6 +107,10 @@ export const announcementHandler: CommandHandler = async (interaction) => {
           break;
         }
         case 'continue': {
+          await interaction.editReply({
+            content: 'Sending…',
+            components: [],
+          });
           await selectTargets(
             interaction,
             selectedUserType,

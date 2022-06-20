@@ -30,7 +30,6 @@ export const admin: Command = {
         return;
 
       const subCommand = interaction.options.getSubcommand();
-      console.log(subCommand);
 
       await interaction.deferReply({ ephemeral: true });
       switch (subCommand) {

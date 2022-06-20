@@ -50,7 +50,7 @@ const QuantifyPeriodPage = (): JSX.Element => {
         </React.Suspense>
       </div>
 
-      <div className="praise-box">
+      <div className="praise-box px-0">
         <React.Suspense fallback="Loading…">
           <QuantifyPeriodTable />
         </React.Suspense>

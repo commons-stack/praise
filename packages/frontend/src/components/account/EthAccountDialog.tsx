@@ -49,7 +49,7 @@ const EthAccountDialog = ({
       <div className="flex items-center justify-center min-h-screen">
         <Dialog.Overlay className="fixed inset-0 bg-gray-800 opacity-30" />
         <div
-          className="relative max-w-xl p-6 mx-auto bg-white rounded"
+          className="relative max-w-xl p-6 mx-auto bg-white rounded dark:bg-slate-900"
           ref={contentRef}
         >
           <div className="flex justify-end">
@@ -61,7 +61,7 @@ const EthAccountDialog = ({
             <div className="flex justify-center mb-8">
               <Jazzicon address={address} className="w-12 h-12" />
             </div>
-            <Dialog.Title className="text-center">
+            <Dialog.Title className="text-center dark:text-white">
               {shortenEthAddress(address)}
             </Dialog.Title>
             <div className="flex justify-center space-x-4">

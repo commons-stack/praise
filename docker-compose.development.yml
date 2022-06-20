@@ -14,7 +14,7 @@ services:
 
   api:
     container_name: api-praise
-    image: ghcr.io/commonsbuild/praise-dev/api:latest
+    image: ghcr.io/commons-stack/praise-dev/api:latest
     env_file:
       - .env
       - ./packages/api/.env
@@ -26,7 +26,7 @@ services:
 
   discord-bot:
     container_name: discord-bot-praise
-    image: ghcr.io/commonsbuild/praise-dev/discord-bot:latest
+    image: ghcr.io/commons-stack/praise-dev/discord-bot:latest
     env_file:
       - .env
       - ./packages/discord-bot/.env
@@ -36,7 +36,7 @@ services:
 
   frontend:
     container_name: frontend-praise
-    image: ghcr.io/commonsbuild/praise-dev/frontend:latest
+    image: ghcr.io/commons-stack/praise-dev/frontend:latest
     env_file:
       - .env
       - ./packages/frontend/.env

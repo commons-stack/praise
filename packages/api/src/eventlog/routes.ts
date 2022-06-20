@@ -5,5 +5,6 @@ import * as controller from './controllers';
 const eventLogRouter = Router();
 
 eventLogRouter.getAsync('/all', controller.all);
+eventLogRouter.getAsync('/types', controller.types);
 
 export { eventLogRouter };

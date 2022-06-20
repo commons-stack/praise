@@ -93,9 +93,10 @@ export interface PeriodQuantifierPraiseInput extends Query {
   quantifierId?: string;
 }
 
-export interface AssignQuantifiersDryRunOutput {
+export interface Assignments {
   poolAssignments: Quantifier[];
-  poolDeficit: number;
+  remainingAssignmentsCount: number;
+  remainingPraiseCount: number;
 }
 
 export interface PeriodDateRange {

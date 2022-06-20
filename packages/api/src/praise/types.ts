@@ -85,7 +85,7 @@ export interface Receiver {
 }
 
 export interface Quantifier {
-  _id?: string;
+  _id: string;
   accounts: UserAccountDocument[];
   receivers: Receiver[];
 }

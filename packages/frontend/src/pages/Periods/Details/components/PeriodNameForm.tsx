@@ -80,7 +80,7 @@ const PeriodNameForm = (): JSX.Element | null => {
                       autoComplete="off"
                       ref={inputRef}
                       placeholder="e.g. May-June"
-                      className="relative left-[-5px] pl-1 text-xl font-semibold bg-transparent border border-transparent hover:border-gray-300"
+                      className="relative left-[-5px] pl-1 text-xl font-semibold bg-transparent border border-transparent dark:border-transparent hover:border-gray-300 dark:hover:border-slate-800 dark:bg-transparent"
                       onKeyDown={(e): void => {
                         switch (e.key) {
                           case 'Tab':

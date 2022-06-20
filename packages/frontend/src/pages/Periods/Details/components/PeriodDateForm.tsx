@@ -86,7 +86,7 @@ const PeriodDateForm = (): JSX.Element | null => {
                         input.onChange(e);
                         void handleSubmit(e);
                       }}
-                      inputClassName="relative py-0 px-1 pl-1 my-0 text-sm bg-transparent border border-transparent hover:border-gray-300 w-24"
+                      inputClassName="relative py-0 px-1 pl-1 my-0 text-sm bg-transparent border border-transparent dark:border-transparent hover:border-gray-300 w-24 dark:hover:border-slate-800 dark:bg-transparent"
                       tzLabel="UTC"
                     />
                   </div>

@@ -90,7 +90,7 @@ const AuthenticatedLayout = (): JSX.Element | null => {
       </div>
 
       <div className="md:pl-64 flex flex-col flex-1">
-        <div className="sticky top-0 z-10 md:hidden py-1 px-1 bg-gray-50 border-b shadow-sm flex justify-start items-center w-full">
+        <div className="sticky top-0 z-10 md:hidden py-1 px-1 bg-gray-50 dark:bg-slate-900 border-b shadow-sm flex justify-start items-center w-full">
           <button
             type="button"
             className="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"

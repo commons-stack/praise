@@ -19,7 +19,7 @@ const UsersTablePagination = ({
   setPage,
 }: IUsersTablePagination): JSX.Element => {
   return (
-    <div className="flex gap-4 items-center select-none mt-8 pl-4">
+    <div className="flex gap-4 items-center select-none mt-8 pl-9">
       <FontAwesomeIcon
         icon={faAnglesLeft}
         size="sm"

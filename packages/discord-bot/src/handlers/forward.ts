@@ -20,7 +20,7 @@ import {
 } from '../utils/praiseEmbeds';
 import { assertPraiseGiver } from '../utils/assertPraiseGiver';
 
-import { praiseAllowedInChannel } from '../utils/praisePermissions';
+import { assertPraiseAllowedInChannel } from '../utils/assertPraiseAllowedInChannel';
 import { CommandHandler } from 'src/interfaces/CommandHandler';
 
 export const forwardHandler: CommandHandler = async (
@@ -35,18 +35,6 @@ export const forwardHandler: CommandHandler = async (
     return;
   }
 
-  // pass ID of parent channel if command used in a thread.
-  if (
-    (await praiseAllowedInChannel(
-      interaction,
-      channel.type === 'GUILD_PUBLIC_THREAD' ||
-        channel.type === 'GUILD_PRIVATE_THREAD'
-        ? channel?.parent?.id || channel.id
-        : channel.id
-    )) === false
-  )
-    return;
-
   const forwarderAccount = await getUserAccount(member as GuildMember);
   if (!forwarderAccount.user) {
     await interaction.editReply(await notActivatedError());
@@ -60,6 +48,8 @@ export const forwardHandler: CommandHandler = async (
     );
     return;
   }
+
+  if ((await assertPraiseAllowedInChannel(interaction)) === false) return;
 
   const praiseGiver = interaction.options.getMember('giver') as GuildMember;
   if (!praiseGiver) {

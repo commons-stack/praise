@@ -47,3 +47,8 @@ export interface EventLogTypeDto {
   label: string;
   description: string;
 }
+
+export interface EventLogInput {
+  type?: Types.ObjectId[];
+  description?: Object;
+}

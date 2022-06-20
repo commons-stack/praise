@@ -37,7 +37,7 @@ const SignMessageLayout = ({
         <div className="w-full p-5 text-2xl font-bold">
           <FontAwesomeIcon icon={faPrayingHands} size="1x" className="m-2" />
         </div>
-        <div className="p-4 py-8 m-auto space-y-8 border border-solid rounded-lg shadow-sm bg-gray-50 w-96">
+        <div className="p-4 py-8 m-auto space-y-8 border border-solid rounded-lg shadow-sm bg-gray-50 w-96 dark:bg-slate-900">
           {children}
 
           {isLoading && !data && !message ? (

@@ -9,8 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Filter, search and sort the event log #376 #455
+- Dark mode! #420 #453
+- Support multiple wallets: WalletConnect, Trust, Rainbow etc #424
+- Export the user list as csv #402 #450
 - Option to turn on/off the Discord role requirement for Praise givers #419 #434 #440
 - Support multiple wallets: WalletConneect, Trust, Rainbow etc #424
+- Option to assign praise evenly between all quantifiers #263
+- More verbose output from the `/admin announce` command #317 #441
+- Option to limitting praise access to certain channels. #452 (#264)
 
 ### Fixed
 

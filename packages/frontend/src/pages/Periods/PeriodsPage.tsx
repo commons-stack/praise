@@ -14,9 +14,9 @@ const PeriodsPage = (): JSX.Element => {
 
       <ActiveNoticesBoard />
 
-      <div className="praise-box">
+      <div className="praise-box px-0">
         <AdminOnly>
-          <div className="mb-2 text-right">
+          <div className="mb-2 text-right px-7">
             <Link to="/periods/createupdate">
               <button className="praise-button" id="create-period-button">
                 <FontAwesomeIcon icon={faPlus} size="1x" className="mr-2" />
