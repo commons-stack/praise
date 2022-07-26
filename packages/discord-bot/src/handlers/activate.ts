@@ -45,7 +45,10 @@ export const activationHandler: CommandHandler = async (interaction) => {
   );
 
   if (!userAccount) {
-    await interaction.reply('Unable to create user account.');
+    await interaction.reply({
+      content: 'Unable to create user account.',
+      ephemeral: true,
+    });
     return;
   }
 
